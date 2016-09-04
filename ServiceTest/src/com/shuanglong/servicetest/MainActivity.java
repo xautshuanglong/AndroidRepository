@@ -16,7 +16,15 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_main);
 		Logger.init().hideThreadInfo();
-		Logger.t("Tag").d("Inside onCreate ...");
+		Logger.d("Activity is created...");
+	}
+	
+	@Override
+	protected void onDestroy()
+	{
+		// TODO Auto-generated method stub
+		Logger.d("Activity is destroyed...");
+		super.onDestroy();
 	}
 
 	@Override
@@ -24,6 +32,7 @@ public class MainActivity extends Activity
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+		Logger.d("Option menu is crated ...");
 		return true;
 	}
 
@@ -33,9 +42,11 @@ public class MainActivity extends Activity
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
+		Logger.d("Options item is selected ...");
 		int id = item.getItemId();
 		if (id == R.id.action_settings)
 		{
+			Logger.d("item [id==%d] is selected title=%s", id, item.getTitle().toString());
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
