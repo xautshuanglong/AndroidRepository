@@ -1,18 +1,25 @@
 package com.shuanglong.turingrobot;
 
+import com.shuanglong.logger.Logger;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends Activity
+public class MainActivity extends Activity implements HttpGetDataListener
 {
+	private HttpData mHttpData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Logger.init().hideThreadInfo();
+		Logger.d("MainActivity is created...");
+		mHttpData = new HttpData("http://www.tuling123.com/openapi/api?key=ce7e39014a844b56a5cc01033fdfd81f&info=ÄãºÃ", this);
+		mHttpData.execute();
 	}
 
 	@Override
@@ -35,5 +42,12 @@ public class MainActivity extends Activity
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void getDataUrl(String data)
+	{
+		// TODO Auto-generated method stub
+		System.out.println(data);
 	}
 }
